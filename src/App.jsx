@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import CategoryList from './components/category/CategoryList'
+import StoreProvider from './state/StoreProvider'
 
 function App() {
 
   return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
+    <StoreProvider>
+      <CategoryList />
+    </StoreProvider>
   )
 }
 
