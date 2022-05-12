@@ -2,11 +2,11 @@ import React from 'react'
 import Note from './Note'
 import NoteForm from './NoteForm'
 
-const NoteList = ({notes}) => {
+const NoteList = ({notes, id}) => {
   return (
     <div>
-      <NoteForm />
-      {notes.map(note => <Note key={note.id}note={note}/>)}
+      <NoteForm id={id}/>
+      {notes.map(note => <Note key={note.id} note={note}/>)}
     </div>
   )
 }

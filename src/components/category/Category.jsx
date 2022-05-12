@@ -22,7 +22,7 @@ const Category = ({category: {id, title, notes}}) => {
     <div>
       <h2>{title}</h2>
       <button onClick={() => deleteCategory(id)}>Delete category</button>
-      <NoteList notes={notes}/>
+      <NoteList id={id} notes={notes}/>
     </div>
   )
 }

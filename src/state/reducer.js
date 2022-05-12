@@ -13,12 +13,57 @@ const reducer = (state, action) => {
       const newStateWithoutCategory = {...state, 
       categoryList: newListWithoutCategory}
       return newStateWithoutCategory
+
+
     case 'add-note':
-      return state
+      const categoryToAddNote = state.categoryList.find(category => category.id === action.payload.categoryId)
+
+      const categoryWithNoteAdded = {...categoryToAddNote,
+      notes: [...categoryToAddNote.notes, action.payload]} 
+
+      const newCategoryListWithNoteAdded = state.categoryList.map(category => category.id === action.payload.categoryId?categoryWithNoteAdded:category)
+
+      const newStateWithNoteAdded = {...state,
+      categoryList: newCategoryListWithNoteAdded}
+      return newStateWithNoteAdded
+
+
     case 'delete-note':
-      return state
+      const categoryToDeleteNote = state.categoryList.find(category => category.id === action.payload.categoryId)
+
+      const listWithoutNote = categoryToDeleteNote.notes.filter(note => note.id !== action.payload.id)
+      const categoryWithoutNote = {...categoryToDeleteNote,
+      notes: listWithoutNote} 
+
+      const newCategoryListWithoutNote = state.categoryList.map(category => category.id === categoryToDeleteNote.id?categoryWithoutNote:category)
+
+      const newStateWithoutNote = {...state,
+      categoryList: newCategoryListWithoutNote}
+      return newStateWithoutNote
     case 'update-note':
-      return state
+      const categoryToUpdateNote = state.categoryList.find(category => category.id === action.payload.categoryId)
+
+      const listWithNoteUpdated = categoryToUpdateNote.notes.map(note => note.id === action.payload.id?action.payload:note)
+      const categoryWithNoteUpdated = {...categoryToUpdateNote,
+      notes: listWithNoteUpdated} 
+
+      const newCategoryListWithNoteUpdated = state.categoryList.map(category => category.id === categoryToUpdateNote.id?categoryWithNoteUpdated:category)
+
+      const newStateWithNoteUpdated = {...state,
+      categoryList: newCategoryListWithNoteUpdated,
+      note: {
+        id: '',
+        message: '',
+        done: false,
+        categoryId: ''
+      }}
+      return newStateWithNoteUpdated
+    case 'add-note-to-be-updated':
+      const newStateWithNoteToBeUpdated = {
+        ...state,
+        note: action.payload
+      }
+      return newStateWithNoteToBeUpdated
   }
 }
 
