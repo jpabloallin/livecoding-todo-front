@@ -40,7 +40,7 @@ const Note = ({note}) => {
   }
 
   const newHashtag = async (note, hashtag) => {
-    if(state.hashtag) {
+    if(hashtag) {
       const newNoteHashtag = { ...note, hashtag: hashtag };
       let noteHashtagPromise = await fetch(`http://localhost:8081/api/v1/update/note`,
         {
