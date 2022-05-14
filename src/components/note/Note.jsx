@@ -1,10 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { deleteNote, putNote } from '../../actions/noteActions/noteActions';
 import { Store } from '../../state/StoreProvider';
+import NoteHashtag from './NoteHashtag';
 
 const Note = ({note}) => {
 
   const {dispatch} = useContext(Store)
+
+  //const[hashtag, setHashtag] = useState('')
+
+  const [showHashtag, setShowHashtag] = useState(false);
 
   const onCheckbox = async (e)=> {
     const checked = e.currentTarget.checked;
@@ -36,16 +41,18 @@ const Note = ({note}) => {
     dispatch(action)
   }
 
-  const addHashtag = ()=>{
-    console.log('new hashtag')
-  }
+  const showHashtagInput = () => {
+    setShowHashtag(!showHashtag);
+  };
+
   return (
     <div>
       <h2 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h2>
       <input onChange={onCheckbox} type="checkbox" checked={note.done} />
       <button onClick={() => onDeleteNote(note.id)}>delete note</button>
       <button onClick={editNote}>edit note</button>
-      <button onClick={addHashtag}>Add hashtag</button>
+      <button onClick={showHashtagInput}>Add hashtag</button>
+      {showHashtag && <NoteHashtag />}
     </div>
   )
 }
