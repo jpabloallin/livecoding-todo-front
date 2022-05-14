@@ -17,8 +17,7 @@ const NoteHashtag = ({newHashtag, note}) => {
   const [hashtag, setHashtag] = useState('')
 
   const addHashtag = (event) =>{
-    const newHashtagName = event.target.value
-    setHashtag(newHashtagName)
+    setHashtag(event.target.value)
   }
 
   return (
