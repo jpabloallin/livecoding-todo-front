@@ -5,9 +5,10 @@ import NoteHashtag from './NoteHashtag';
 
 const Note = ({note}) => {
 
-  const {dispatch} = useContext(Store)
+  const {dispatch} = useContext(Store);
 
   const [showHashtag, setShowHashtag] = useState(false);
+
 
   const onCheckbox = async (e)=> {
     const checked = e.currentTarget.checked;
@@ -39,7 +40,8 @@ const Note = ({note}) => {
     dispatch(action)
   }
 
-  const newHashtag = async (note, hashtag) => {
+  const newHashtag = async (e, note, hashtag, formRef) => { 
+    e.preventDefault()
     if(hashtag) {
       const newNoteHashtag = { ...note, hashtag: hashtag };
       let noteHashtagPromise = await fetch(`http://localhost:8081/api/v1/update/note`,
@@ -55,11 +57,9 @@ const Note = ({note}) => {
         type: "new-hashtag",
         payload: noteHashtag
       });
-      formRef.current.reset();
+      formRef.current.reset()
     }
-    setHashtag();
   };
-
 
   const showHashtagInput = () => {
     setShowHashtag(!showHashtag);
@@ -68,7 +68,7 @@ const Note = ({note}) => {
   return (
     <div>
       <h2 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h2>
-      <em>{note.hashtag}</em><br/><br/>
+      <h4>{note.hashtag}</h4><br/><br/>
       <input onChange={onCheckbox} type="checkbox" checked={note.done} />
       <button onClick={() => onDeleteNote(note.id)}>delete note</button>
       <button onClick={editNote}>edit note</button>

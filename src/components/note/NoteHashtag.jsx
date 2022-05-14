@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useRef, useState } from "react"
 
 /**
  * Component that renders the hashtag form 
@@ -9,6 +9,7 @@ import { useState, useRef } from "react"
 const NoteHashtag = ({newHashtag, note}) => {
 
   const formRef = useRef(null);
+
   const [hashtag, setHashtag] = useState('')
 
   /**
@@ -25,7 +26,7 @@ const NoteHashtag = ({newHashtag, note}) => {
         <input onChange={addHashtag} type="text" name="addHashtag" placeholder="Add Hashtag"
         className="form-control form-control-lg"/>
         <button 
-        onClick={() => newHashtag(note, hashtag)} className="btn btn-warning me-2 m-1">
+        onClick={(e) => newHashtag(e, note, hashtag, formRef)} className="btn btn-warning me-2 m-1">
           Save Hashtag</button>
         </div>
     </form>

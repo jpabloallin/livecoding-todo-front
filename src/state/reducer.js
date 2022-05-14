@@ -66,8 +66,24 @@ const reducer = (state, action) => {
       return newStateWithNoteToBeUpdated
 
       case 'new-hashtag':
-      const newStateOfNoteWithHashtag = action.payload
-      return newStateOfNoteWithHashtag
+      const categoryToUpdateNoteHashtag = state.categoryList.find(category => category.id === action.payload.categoryId)
+
+      const listWithNoteHashtagUpdated = categoryToUpdateNoteHashtag.notes.map(note => note.id === action.payload.id?action.payload:note)
+      const categoryWithNoteHashtagUpdated = {...categoryToUpdateNoteHashtag,
+      notes: listWithNoteHashtagUpdated} 
+
+      const newCategoryListWithNoteHashtagUpdated = state.categoryList.map(category => category.id === categoryToUpdateNoteHashtag.id?categoryWithNoteHashtagUpdated:category)
+
+      const newStateWithNoteHashtagUpdated = {...state,
+      categoryList: newCategoryListWithNoteHashtagUpdated,
+      note: {
+        id: '',
+        message: '',
+        done: false,
+        hashtag: '',
+        categoryId: ''
+      }}
+      return newStateWithNoteHashtagUpdated
   }
 }
 
