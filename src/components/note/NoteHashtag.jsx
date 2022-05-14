@@ -26,7 +26,7 @@ const NoteHashtag = ({newHashtag, note}) => {
         <input onChange={addHashtag} type="text" name="addHashtag" placeholder="Add Hashtag"
         className="form-control form-control-lg"/>
         <button 
-        onClick={(e) => newHashtag(e, note, hashtag, formRef)} className="btn btn-warning me-2 m-1">
+        onClick={(e) => newHashtag(e, note, hashtag, formRef)} className="btn btn-success">
           Save Hashtag</button>
         </div>
     </form>

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import CategoryList from './components/category/CategoryList'
 import StoreProvider from './state/StoreProvider'
 

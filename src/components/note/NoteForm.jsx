@@ -46,10 +46,10 @@ const NoteForm = ({id}) => {
 
   return (
     <div>
-      <form>
+      <form className="form-control border border-5">
         <label htmlFor="note"></label>
-        <input onChange={addingMessage} type="text" name="note" value={message} placeholder={id===state.note.categoryId?state.note.message:''}/>
-        {id===state.note.categoryId?<button onClick={editNote}>Edit note</button>:<button onClick={addNote}>Add note</button>}
+        <input className="form-control form-control-lg" onChange={addingMessage} type="text" name="note" value={message} placeholder={id===state.note.categoryId?state.note.message:''}/>
+        {id===state.note.categoryId?<button onClick={editNote} className="btn btn-warning me-2 m-1">Edit note</button>:<button onClick={addNote} className="btn btn-success">Add note</button>}
       </form>
     </div>
   )

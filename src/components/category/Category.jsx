@@ -19,10 +19,13 @@ const Category = ({category: {id, title, notes}}) => {
   }
 
   return (
-    <div>
-      <hr/><hr/><hr/>
-      <h1>{title}</h1>
-      <button onClick={() => deleteCategory(id)}>Delete category</button>
+    <div className="m-2">
+      <hr className="border border-dark"/>
+      <hr className="border border-dark"/>
+      <div className="d-flex justify-content-center">
+      <h2>{title}</h2>
+      <button onClick={() => deleteCategory(id)} className="btn btn-danger m-1 p d-flex">Delete category</button>
+      </div>
       <NoteList id={id} notes={notes}/>
     </div>
   )

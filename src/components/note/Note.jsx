@@ -66,13 +66,15 @@ const Note = ({note}) => {
   };
 
   return (
-    <div>
-      <h2 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h2>
-      <h4>{note.hashtag}</h4><br/><br/>
-      <input onChange={onCheckbox} type="checkbox" checked={note.done} />
-      <button onClick={() => onDeleteNote(note.id)}>delete note</button>
-      <button onClick={editNote}>edit note</button>
-      <button onClick={showHashtagInput}>Add hashtag</button>
+    <div className="border border-dark m-3 rounded border-2 d-flex justify-content-evenly ">
+      <h4 className="fw-bold p-3" style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h4>
+      <div className="mx-auto pt-3">
+        <em className="mt-3">{note.hashtag}</em><br/><br/>
+      </div>
+      <input className="form-check-input m-4" onChange={onCheckbox} type="checkbox" checked={note.done} />
+      <button className="btn btn-danger m-1" onClick={() => onDeleteNote(note.id)}>delete note</button>
+      <button className="btn btn-warning m-1" onClick={editNote}>edit note</button>
+      <button onClick={showHashtagInput} className="btn btn-success m-1">Add hashtag</button>
       {showHashtag && <NoteHashtag newHashtag = {newHashtag} note = {note} />}
     </div>
   )
