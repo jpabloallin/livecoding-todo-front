@@ -7,8 +7,6 @@ const Note = ({note}) => {
 
   const {dispatch} = useContext(Store)
 
-  //const[hashtag, setHashtag] = useState('')
-
   const [showHashtag, setShowHashtag] = useState(false);
 
   const onCheckbox = async (e)=> {
@@ -41,6 +39,28 @@ const Note = ({note}) => {
     dispatch(action)
   }
 
+  const newHashtag = async (note, hashtag) => {
+    if(state.hashtag) {
+      const newNoteHashtag = { ...note, hashtag: hashtag };
+      let noteHashtagPromise = await fetch(`http://localhost:8081/api/v1/update/note`,
+        {
+          method: "PUT",
+          headers: {"Content-type": "application/json", Accept: "application/json"},
+          body: JSON.stringify(newNoteHashtag),
+        }
+      );
+
+      let noteHashtag = await noteHashtagPromise.json();
+      dispatch({
+        type: "new-hashtag",
+        payload: noteHashtag
+      });
+      formRef.current.reset();
+    }
+    setHashtag();
+  };
+
+
   const showHashtagInput = () => {
     setShowHashtag(!showHashtag);
   };
@@ -48,11 +68,12 @@ const Note = ({note}) => {
   return (
     <div>
       <h2 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h2>
+      <em>{note.hashtag}</em><br/><br/>
       <input onChange={onCheckbox} type="checkbox" checked={note.done} />
       <button onClick={() => onDeleteNote(note.id)}>delete note</button>
       <button onClick={editNote}>edit note</button>
       <button onClick={showHashtagInput}>Add hashtag</button>
-      {showHashtag && <NoteHashtag />}
+      {showHashtag && <NoteHashtag newHashtag = {newHashtag} note = {note} />}
     </div>
   )
 }

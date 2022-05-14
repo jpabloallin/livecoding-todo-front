@@ -64,6 +64,10 @@ const reducer = (state, action) => {
         note: action.payload
       }
       return newStateWithNoteToBeUpdated
+
+      case 'new-hashtag':
+      const newStateOfNoteWithHashtag = action.payload
+      return newStateOfNoteWithHashtag
   }
 }
 
