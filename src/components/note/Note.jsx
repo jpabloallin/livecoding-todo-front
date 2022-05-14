@@ -35,12 +35,17 @@ const Note = ({note}) => {
     }
     dispatch(action)
   }
+
+  const addHashtag = ()=>{
+    console.log('new hashtag')
+  }
   return (
     <div>
-      <h1 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h1>
+      <h2 style={note.done?{'textDecoration': 'line-through'}:{}}>{note.message}</h2>
       <input onChange={onCheckbox} type="checkbox" checked={note.done} />
       <button onClick={() => onDeleteNote(note.id)}>delete note</button>
       <button onClick={editNote}>edit note</button>
+      <button onClick={addHashtag}>Add hashtag</button>
     </div>
   )
 }

@@ -6,6 +6,7 @@ const NoteList = ({notes, id}) => {
   return (
     <div>
       <NoteForm id={id}/>
+      <hr />
       {notes.map(note => <Note key={note.id} note={note}/>)}
     </div>
   )

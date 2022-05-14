@@ -12,6 +12,7 @@ const initialState = {
     id: '',
     message: '',
     done: false,
+    hashtag: '',
     categoryId: ''
   }
 }
