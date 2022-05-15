@@ -27,12 +27,15 @@ const CategoryList = () => {
   const filterClick = (e) => {
     console.log("filter clickkk");
     e.preventDefault()
-    if(inputFilter){
-      const filter = {
-        inputFilter
+    if(inputFilter) {
+    getAllCategories().then(categories => {
+      const action = {
+        type: 'get-categories-hashtag',
+        payload: inputFilter
       }
+      dispatch(action)
+    })
       console.log("input filter: " + inputFilter);
-      console.log("constante filter" + filter);
     }
   }
   return (

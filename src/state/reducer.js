@@ -3,61 +3,48 @@ const reducer = (state, action) => {
     case 'get-categories':
       const newStateWithAllCategories = {...state, categoryList: action.payload}
       return newStateWithAllCategories
+
     case 'create-category':
       console.log(action.payload);
       const previousCategoyList = [...state.categoryList, action.payload]
       const newStateWithCategoryAdded = {...state, categoryList: previousCategoyList}
       return newStateWithCategoryAdded
+
     case 'deleteCategory':
       const newListWithoutCategory = state.categoryList.filter(category => category.id !== action.payload)
       const newStateWithoutCategory = {...state, 
       categoryList: newListWithoutCategory}
       return newStateWithoutCategory
 
-
     case 'add-note':
       const categoryToAddNote = state.categoryList.find(category => category.id === action.payload.categoryId)
-
-      const categoryWithNoteAdded = {...categoryToAddNote,
-      notes: [...categoryToAddNote.notes, action.payload]} 
-
+      const categoryWithNoteAdded = {...categoryToAddNote, notes: [...categoryToAddNote.notes, action.payload]} 
       const newCategoryListWithNoteAdded = state.categoryList.map(category => category.id === action.payload.categoryId?categoryWithNoteAdded:category)
-
-      const newStateWithNoteAdded = {...state,
-      categoryList: newCategoryListWithNoteAdded}
+      const newStateWithNoteAdded = {...state, categoryList: newCategoryListWithNoteAdded}
       return newStateWithNoteAdded
-
 
     case 'delete-note':
       const categoryToDeleteNote = state.categoryList.find(category => category.id === action.payload.categoryId)
-
       const listWithoutNote = categoryToDeleteNote.notes.filter(note => note.id !== action.payload.id)
-      const categoryWithoutNote = {...categoryToDeleteNote,
-      notes: listWithoutNote} 
-
+      const categoryWithoutNote = {...categoryToDeleteNote, notes: listWithoutNote} 
       const newCategoryListWithoutNote = state.categoryList.map(category => category.id === categoryToDeleteNote.id?categoryWithoutNote:category)
-
-      const newStateWithoutNote = {...state,
-      categoryList: newCategoryListWithoutNote}
+      const newStateWithoutNote = {...state, categoryList: newCategoryListWithoutNote}
       return newStateWithoutNote
+
     case 'update-note':
       const categoryToUpdateNote = state.categoryList.find(category => category.id === action.payload.categoryId)
-
       const listWithNoteUpdated = categoryToUpdateNote.notes.map(note => note.id === action.payload.id?action.payload:note)
-      const categoryWithNoteUpdated = {...categoryToUpdateNote,
-      notes: listWithNoteUpdated} 
-
+      const categoryWithNoteUpdated = {...categoryToUpdateNote, notes: listWithNoteUpdated} 
       const newCategoryListWithNoteUpdated = state.categoryList.map(category => category.id === categoryToUpdateNote.id?categoryWithNoteUpdated:category)
-
-      const newStateWithNoteUpdated = {...state,
-      categoryList: newCategoryListWithNoteUpdated,
-      note: {
+      const newStateWithNoteUpdated = {...state,categoryList: newCategoryListWithNoteUpdated,
+       note: {
         id: '',
         message: '',
         done: false,
         categoryId: ''
       }}
       return newStateWithNoteUpdated
+
     case 'add-note-to-be-updated':
       const newStateWithNoteToBeUpdated = {
         ...state,
@@ -67,13 +54,9 @@ const reducer = (state, action) => {
 
       case 'new-hashtag':
       const categoryToUpdateNoteHashtag = state.categoryList.find(category => category.id === action.payload.categoryId)
-
       const listWithNoteHashtagUpdated = categoryToUpdateNoteHashtag.notes.map(note => note.id === action.payload.id?action.payload:note)
-      const categoryWithNoteHashtagUpdated = {...categoryToUpdateNoteHashtag,
-      notes: listWithNoteHashtagUpdated} 
-
+      const categoryWithNoteHashtagUpdated = {...categoryToUpdateNoteHashtag, notes: listWithNoteHashtagUpdated} 
       const newCategoryListWithNoteHashtagUpdated = state.categoryList.map(category => category.id === categoryToUpdateNoteHashtag.id?categoryWithNoteHashtagUpdated:category)
-
       const newStateWithNoteHashtagUpdated = {...state,
       categoryList: newCategoryListWithNoteHashtagUpdated,
       note: {
@@ -84,6 +67,16 @@ const reducer = (state, action) => {
         categoryId: ''
       }}
       return newStateWithNoteHashtagUpdated
+
+      case 'get-categories-hashtag':
+        const filtered = state.categoryList.filter(category => {
+          return category.notes.find(hashtag => {
+            if (hashtag.hashtag === action.payload) {
+              return true;
+            }
+          });
+        });
+        return {...state, categoryList:filtered}
   }
 }
 
