@@ -75,7 +75,9 @@ const reducer = (state, action) => {
               return true;
             }
           });
+          
         });
+        //const filtered2 = state.categoryList.filter(category => category.notes.find(hashtag => hashtag.hashtag === action.payload));
         return {...state, categoryList:filtered}
   }
 }
