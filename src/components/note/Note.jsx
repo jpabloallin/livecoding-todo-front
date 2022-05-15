@@ -9,7 +9,6 @@ const Note = ({note}) => {
 
   const [showHashtag, setShowHashtag] = useState(false);
 
-
   const onCheckbox = async (e)=> {
     const checked = e.currentTarget.checked;
     const noteWithCheckbox = {...note, done: checked}
@@ -32,6 +31,7 @@ const Note = ({note}) => {
     }
   }
 
+  console.log("nota filter" + inputFilter);
   const editNote = ()=>{
     const action = {
       type: 'add-note-to-be-updated',

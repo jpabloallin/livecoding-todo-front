@@ -28,7 +28,7 @@ const NoteHashtag = ({newHashtag, note}) => {
         <button 
         onClick={(e) => newHashtag(e, note, hashtag, formRef)} className="btn btn-success">
           Save Hashtag</button>
-        </div>
+      </div>
     </form>
   )
 }
