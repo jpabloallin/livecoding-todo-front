@@ -69,16 +69,18 @@ const reducer = (state, action) => {
       return newStateWithNoteHashtagUpdated
 
       case 'get-categories-hashtag':
-        const filtered = state.categoryList.filter(category => {
-          return category.notes.find(hashtag => {
-            if (hashtag.hashtag === action.payload) {
-              return true;
-            }
+        if (action.payload.length > 0) {
+          const filtered = state.categoryList.filter(category => {
+            return category.notes.find(hashtag => {
+              if (hashtag.hashtag === action.payload) {
+                return true;
+              }
+            });
+            
           });
-          
-        });
-        //const filtered2 = state.categoryList.filter(category => category.notes.find(hashtag => hashtag.hashtag === action.payload));
-        return {...state, categoryList:filtered}
+          //const filtered2 = state.categoryList.filter(category => category.notes.find(hashtag => hashtag.hashtag === action.payload));
+          return {...state, categoryList:filtered}
+        }
   }
 }
 
