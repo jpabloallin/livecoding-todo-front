@@ -25,7 +25,6 @@ const CategoryList = () => {
   }
 
   const filterClick = (e) => {
-    console.log("filter clickkk");
     e.preventDefault()
     if(inputFilter) {
     getAllCategories().then(categories => {
@@ -35,7 +34,6 @@ const CategoryList = () => {
       }
       dispatch(action)
     })
-      console.log("input filter: " + inputFilter);
     }
   }
   return (
