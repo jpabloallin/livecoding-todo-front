@@ -31,7 +31,6 @@ const Note = ({note}) => {
     }
   }
 
-  console.log("nota filter" + inputFilter);
   const editNote = ()=>{
     const action = {
       type: 'add-note-to-be-updated',
